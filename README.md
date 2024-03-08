@@ -15,4 +15,6 @@
 
 
 ### Run program
+1. Create outputDataFiles folder in root.
+2. In VS Code terminal, run 'py main.py'... and review .csv files in outputDataFiles folder.
 
