@@ -1,10 +1,11 @@
-from xml.etree import ElementTree
+import xmltodict
 import csv
 from src.formatString import formatLongText
 
-def convertXmlUsingEtree(outputFilename) -> None:
+def convertXmlUsingToDict(outputFilename) -> None:
     # Parse XML file
-    xml = ElementTree.parse("inputDataFiles/catalogs.xml")
+    with open("inputDataFiles/catalogs.xml") as xmlFile:
+        xml = xmltodict.parse(xmlFile.read())
 
     # Output CSV
     outputFilePath = f'outputDataFiles/{outputFilename}.csv'
@@ -15,21 +16,22 @@ def convertXmlUsingEtree(outputFilename) -> None:
     csvFileWriter.writerow(["ID", "AUTHOR", "TITLE", "GENRE", "PRICE", "PUBLISH DATE", "DESCRIPTION"])
 
     # Write each row
-    for book in xml.findall("book"):
+    for book in xml["catalog"]["book"]:
         if(book):
-            id = book.attrib["id"]
-            author = book.find("author")
-            title = book.find("title")
-            genre = book.find("genre")
-            price = book.find("price")
-            publish_date = book.find("publish_date")
-            description = formatLongText(book.find("description").text)
+            id = book["@id"]
+            author = book["author"]
+            title = book["title"]
+            genre = book["genre"]
+            price = book["price"]
+            publish_date = book["publish_date"]
+            description = formatLongText(book["description"])
             # Put texts in list and write csv data line
             csvLineList = [id,
-                           author.text,
-                           title.text,
-                           genre.text,price.text,
-                           publish_date.text,
+                           author,
+                           title,
+                           genre,
+                           price,
+                           publish_date,
                            description]
             
             csvFileWriter.writerow(csvLineList)

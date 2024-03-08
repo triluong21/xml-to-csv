@@ -1,5 +1,10 @@
-from src.elementTreeLib import convertXmlToCsv
+from src.elementTreeLib import convertXmlUsingEtree
+from src.xmlToDictLib import convertXmlUsingToDict
 
 # Create CSV file with element Tree
-outputFileName = "etree"
-convertXmlToCsv(outputFileName)
+outputFileName = "elementtree"
+convertXmlUsingEtree(outputFileName)
+
+outputFileName = "xmltodict"
+convertXmlUsingToDict(outputFileName)
+
