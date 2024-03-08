@@ -1,2 +1,2 @@
 # Output files
-outputDataFiles/
+*.csv
